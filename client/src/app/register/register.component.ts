@@ -1,6 +1,7 @@
 import { Component,  EventEmitter,  input, output, Output,Input, inject } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import { AccountService } from '../_services/account.service';
 export class RegisterComponent {
  accountService = inject(AccountService);
  model:any={};
+ toasterService = inject(ToastrService)
   //@Input() usersFromHomeComponent:any; // data gettoing from parent components old way of getting data
   // for above we need Input to be imported 
   
@@ -34,9 +36,7 @@ export class RegisterComponent {
        console.log(respons);
        this.cancel();
     },
-    error:(error)=>{
-
-    },
+    error:(error)=>{console.log(error);this.toasterService.error(error.error)},
     complete:()=>console.log("Registration Done.")
   });
 }

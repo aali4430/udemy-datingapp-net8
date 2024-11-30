@@ -5,11 +5,13 @@ import { routes } from './app.routes';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import {provideAnimations } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideHttpClient(),
-    provideAnimations()
+    provideAnimations(),
+    provideToastr({positionClass: 'toast-bottom-right'})
  
 
   ]
