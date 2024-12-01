@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using API.Extentions;
 using Microsoft.AspNetCore.Diagnostics;
 using API;
+using System.Security.Cryptography;
+//using Microsoft.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,5 +45,19 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+// use services out side the scope of dependency injection using ServiceLocator Pattern
+// we are creating the database and seed the data
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try{
+var context = services.GetRequiredService<DataContext>();
+await context.Database.MigrateAsync();
+await Seed.SeedUser(context);
+}
+catch{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+logger.LogError("Error Occured while using the migration");
+throw;
+}
 
 app.Run();
