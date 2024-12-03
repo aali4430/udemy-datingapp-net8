@@ -9,12 +9,14 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
-http = inject(HttpClient);
+export class HomeComponent 
+//implements OnInit
+{
+//http = inject(HttpClient);
 registerMode=false;
-users:any;
+//users:any;
 ngOnInit(): void {
-  this.getUsers();
+  //this.getUsers();
   
 }
 cancelRegister(dataFromChildCOmponent:boolean)
@@ -25,12 +27,12 @@ registerToggle(){
   this.registerMode = !this.registerMode;
   console.log(this.registerMode);
 }
-getUsers(){
-  var response = this.http.get("http://localhost:5000/api/users").subscribe({
-    next:(response)=>{this.users = response},
-    error:(error)=>{console.log(error)},
-    complete:()=>{console.log("Request Completed");}
-  });
-  //throw new Error('Method not implemented.');
-}
+// getUsers(){
+//   var response = this.http.get("http://localhost:5000/api/users").subscribe({
+//     next:(response)=>{this.users = response},
+//     error:(error)=>{console.log(error)},
+//     complete:()=>{console.log("Request Completed");}
+//   });
+//   //throw new Error('Method not implemented.');
+// }
 }

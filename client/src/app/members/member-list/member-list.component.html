@@ -1,1 +1,6 @@
-<p>member-list works!</p>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+
+    @for (item of members; track item.id) {
+            <app-member-card [memberFromList]="item"></app-member-card>
+    }
+</div>
