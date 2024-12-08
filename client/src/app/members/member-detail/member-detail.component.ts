@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MemberService } from '../../_services/member.service';
 import { Member } from '../../_models/Member';
@@ -11,7 +11,8 @@ import { GalleryComponent,GalleryItem } from '@daelmaak/ngx-gallery';
   standalone: true,
   imports: [TabsModule,GalleryComponent],
   templateUrl: './member-detail.component.html',
-  styleUrl: './member-detail.component.css'
+  styleUrl: './member-detail.component.css',
+  
 })
 export class MemberDetailComponent implements OnInit  {
   memberService =  inject(MemberService);
@@ -60,10 +61,9 @@ export class MemberDetailComponent implements OnInit  {
     this.getMember();
   }
   getMember(){
-    console.log(this.selectedUsername);
     this.memberService.getMember(this.selectedUsername).subscribe({
       next:(member:Member)=> {this.member = member;}
-      //,error:(error)=>{this.toastr.error(error)}
+      ,error:(error)=>{this.toastr.error(error)}
     });
   }
 }

@@ -29,8 +29,8 @@ logout(){
 }
 login(){
   this.accountService.login(this.model).subscribe({
-    next:(response)=>{console.log(response); void this.router.navigateByUrl("/members")},
-    error:(error)=>{console.log(error);this.toasterService.error(error.error)},
+    next:(response)=>{void this.router.navigateByUrl("/members")},
+    error:(error)=>{this.toasterService.error(error.error)},
     complete:()=>{console.log("User Logged In Successfully");}
   });
 }

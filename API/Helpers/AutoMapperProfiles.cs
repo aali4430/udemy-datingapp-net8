@@ -9,8 +9,10 @@ public class AutoMaperProfiles: Profile
 {
     public AutoMaperProfiles(){
         CreateMap<AppUser, MemberDto>()
-        .ForMember(d=>d.Age,o=>o.MapFrom(s=>s.DateOfBirth.CalculateAge() ))
-        .ForMember(d=>d.PhotoUrl, o=> o.MapFrom(s=>s.photos.FirstOrDefault(x=>x.IsMain==true)!.Url));
-                CreateMap<Photo, PhotoDto>();
+            .ForMember(d=>d.Age,o=>o.MapFrom(s=>s.DateOfBirth.CalculateAge() ))
+            .ForMember(d=>d.PhotoUrl, o=> o.MapFrom(s=>s.photos.FirstOrDefault(x=>x.IsMain==true)!.Url));
+        CreateMap<Photo, PhotoDto>();
+        CreateMap<MemberUpdateDto,AppUser>();
+        CreateMap<MemberUpdateDto,MemberDto>();
     }
 }

@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -8,13 +8,17 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { provideToastr } from 'ngx-toastr';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { jwtInterceptor } from './interceptors/jwt.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
-    provideHttpClient(withInterceptors([errorInterceptor,jwtInterceptor])),
+    provideHttpClient(withInterceptors([errorInterceptor,jwtInterceptor,loadingInterceptor])),
     provideAnimations(),
-    provideToastr({positionClass: 'toast-bottom-right'})
+    provideToastr({positionClass: 'toast-bottom-right'}),
+    importProvidersFrom(NgxSpinnerModule),
+    
  
 
   ]

@@ -10,11 +10,12 @@ import { Member } from '../../_models/Member';
 })
 export class MemberCardComponent implements OnInit {
 memberFromList = input.required<Member>();
+profileURL:string = ""
 
 //public profileLink = "member/"+this.memberFromList().username;
 
 ngOnInit(): void {
-  
+  this.profileURL="/members/"+this.memberFromList().username;
 }
 
 }
