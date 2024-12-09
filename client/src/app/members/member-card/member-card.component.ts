@@ -1,10 +1,11 @@
 import { Component, input, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Member } from '../../_models/Member';
 
 @Component({
   selector: 'app-member-card',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './member-card.component.html',
   styleUrl: './member-card.component.css'
 })
